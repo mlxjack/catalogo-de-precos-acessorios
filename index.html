@@ -230,14 +230,14 @@
         <p>Um catálogo super completo com preços, variações exatas (nada de consultar site) e todos os links atualizados dos produtos Chumbada Oficial.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
-          <a class="btn btn-ghost" href="https://chumbadas.com.br" target="_blank" rel="noopener">Ir para o site oficial</a>
+          <a class="btn btn-ghost" href="https://chumbadas.com.br" target="_blank" rel="noopener">Ir para o site</a>
         </div>
       </div>
       <aside class="hero-card" aria-label="Produto em destaque">
-        <img src="https://cdn.shopify.com/s/files/1/0454/5845/6736/files/secretaria-5_f65d3662-97d5-4e60-9411-9598c7576e5e.png?v=1749231375" alt="Secretária Chumbada Oficial" />
+        <img src="https://cdn.shopify.com/s/files/1/0454/5845/6736/files/linhaajing.jpg?v=1777636605" alt="Linha Multi Verax 4X" />
         <div class="hero-price">
-          <div><small>Destaque</small><strong>Secretária</strong></div>
-          <span class="badge">Praticidade</span>
+          <div><small>Lançamento</small><strong>Linha Verax 4X</strong></div>
+          <span class="badge">Alta Performance</span>
         </div>
       </aside>
     </div>
@@ -292,12 +292,12 @@
 </div>
 
 <script>
+const money = v => typeof v === 'number' ? v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'}) : v;
 const logo = 'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/CHUMBADA-OFICIAL.png?v=1756760093';
-
-// Base de Dados de Produtos super refinada baseada estritamente no PDF e nas suas regras
 const products = [
-  // --- VESTUÁRIO ---
+  {section:'Lançamentos', category:'Linhas', name:'Linha Multi Verax 4X 300m', price:'a partir de R$ 79,91', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/linhaajing.jpg?v=1777636605', link:'https://chumbadas.com.br/products/linha-de-pesca?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', featured:true, vars:[['0.5# (0,121mm) - 2kg','R$ 115,88'],['1# (0,171mm) - 2,3kg','R$ 79,91'],['1.2# (0,191mm) - 2,8kg','R$ 79,91'],['1.5# (0,209mm) - 3,5kg','R$ 79,91'],['2# (0,242mm) - 4kg','R$ 79,91'],['3# (0,296mm) - 4,5kg','R$ 79,91'],['3.5# (0,316mm) - 5,5kg','R$ 79,91'],['4.5# (0,358mm) - 6kg','R$ 79,91'],['5# (0,382mm) - 7,5kg','R$ 79,91'],['6# (0,418mm) - 8kg','R$ 79,91'],['8# (0,483mm) - 9kg','R$ 79,91'],['9# (0,520mm) - 11kg','R$ 79,91'],['10# (0,540mm) - 13kg','R$ 79,91'],['12# (0,620mm) - 16kg','R$ 79,91']]},
   {section:'Vestuário', category:'Vestuário', name:'Camiseta de Pesca Masculina', price:'R$ 95,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/camisa-nova.jpg?v=1725024039', link:'https://chumbadas.com.br/products/camiseta-de-pesca-masculina?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Atrativos', name:'Atrativo Comum', price:'R$ 3,50', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/atrativo-ermbalagem-vermelho.png?v=1725023879', link:'https://chumbadas.com.br/products/kit-atrativo-comum-5mm-5-filetes-com-10-unidades?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
   {category:'Vestuário', name:'Avental Chumbada', price:'R$ 31,27', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/avental-03.png?v=1725023927', link:'https://chumbadas.com.br/products/avental-chumbada-bolso-duplo?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
   {category:'Vestuário', name:'Boné Chumbada', price:'R$ 36,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/bones-09.png?v=1723736498', link:'https://chumbadas.com.br/products/bone-chumbada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
   {category:'Vestuário', name:'Chapéu de Palha Chumbada', price:'R$ 37,38', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/chapeu_94827940-2a70-4825-baab-4666a1aaaeb8.png?v=1721917979', link:'https://chumbadas.com.br/products/chapel-de-palha-chumbada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
@@ -312,6 +312,9 @@ const products = [
   {category:'Vestuário', name:'Blusa Corta Vento Esporte', price:'R$ 155,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/corta-vento-azul-claro.png?v=1778242773', link:'https://chumbadas.com.br/products/blusa-corta-vento-chumbada-1?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
   {category:'Vestuário', name:'Blusa Corta Vento Presa Viva', price:'R$ 260,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/corta-vento_91f580da-c848-40b2-9aed-5d341a2f835f.png?v=1778242773', link:'https://chumbadas.com.br/products/blusa-corta-vento-presa-viva-chumbada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
   {category:'Vestuário', name:'Toalha de Mão', price:'R$ 10,75', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/toalha-05_4069c005-8c7b-4992-a007-522148c621f3.png?v=1725026479', link:'https://chumbadas.com.br/products/toalha-chumbada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+
+  // --- LINHAS ---
+  {section:'Linhas', category:'Linhas', name:'Linha Multi Verax', price:'Lançamento', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/linhaajing.jpg?v=1777636605', link:'https://chumbadas.com.br/products/linha-de-pesca?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', featured:true},
 
   // --- TERMINAIS & CHUMBADAS ---
   {section:'Linha Terminal e Anzóis', category:'Terminais', name:'Atrativo Comum', price:'R$ 3,50', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/atrativo-ermbalagem-vermelho.png?v=1725023879', link:'https://chumbadas.com.br/products/kit-atrativo-comum-5mm-5-filetes-com-10-unidades?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
@@ -363,6 +366,7 @@ const products = [
   {category:'Organização', name:'Suporte para Molinetes (4un)', price:'R$ 15,90', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/suporte-para-molinetes-montado.png?v=1725026443', link:'https://chumbadas.com.br/products/porta-pernada-compacto?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', featured:true},
   {category:'Suportes', name:'Kit Suporte Carretilha e Molinete', price:'R$ 16,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Suporte-para-carretilha-e-molinete-individual-amarelo.png?v=1741173082', link:'https://chumbadas.com.br/products/kit-suporte-para-carretilha-e-molinete-indivudual?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
   {category:'Suportes', name:'Adaptador de Vara p/ Molinete', price:'R$ 21,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/adaptador_de_vara.jpg?v=1773061276', link:'https://chumbadas.com.br/products/adaptador-de-vara-para-suporte-de-molinete?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Organização', name:'Suporte de Vara de Parede', price:'R$ 34,89', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/suporte-de-vara-de-parede.png?v=1778242091', link:'https://chumbadas.com.br/products/suporte-de-vara-de-parede?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
   
   // --- ACESSÓRIOS PRÁTICOS ---
   {section:'Acessórios Práticos', category:'Práticos', name:'Copo Organizador', price:'a partir de R$ 1,94', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/c4dd0fe0-b913-4b7f-981a-2bf5407f2337.png?v=1773931964', link:'https://chumbadas.com.br/products/copo-organizador?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['P','R$ 1,94'],['M','R$ 2,46'],['G','R$ 3,60'],['Kit Completo','R$ 7,36']]},
@@ -377,6 +381,7 @@ const products = [
   {category:'Práticos', name:'Agulha de Tarrafa', price:'a partir de R$ 1,20', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/15-20ccm.png?v=1725023380', link:'https://chumbadas.com.br/products/agulha-de-tarrafa?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['15cm','R$ 1,20'],['20cm','R$ 1,85']]},
   {category:'Práticos', name:'Kit Enrolador', price:'a partir de R$ 135,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/kit_enrolador.jpg?v=1725025232', link:'https://chumbadas.com.br/products/kit-enrolador?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['Colorido','R$ 135,00'],['Natural','R$ 150,00']]},
   {category:'Práticos', name:'Alicate de Contenção Plástico', price:'a partir de R$ 4,97', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/alicate.jpg?v=1773842723', link:'https://chumbadas.com.br/collections/acessorios', vars:[['Outras Cores','R$ 4,97'],['Cor Glow','R$ 5,50']]},
+  {category:'Práticos', name:'Alicate de Pesca', price:'R$ 34,50', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/alicate.jpg?v=1773842723', link:'https://chumbadas.com.br/products/alicate-chumbada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
   {category:'Práticos', name:'Adaptador de Carretilha Kit c/ 4', price:'R$ 11,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/suporte-para-carretilhas-02_045bc35a-4013-430e-9ec8-ea46e12db27b.png?v=1725026418', link:'https://chumbadas.com.br/products/kit-adaptador-de-carretilha?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
   {category:'Práticos', name:'Bastão Luminoso', price:'R$ 3,50', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/bastao-luminoso-embalagem.png?v=1718111813', link:'https://chumbadas.com.br/products/bastao-luminoso-star-light?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
   {category:'Práticos', name:'Carretel Redondo', price:'R$ 1,20', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Carretel-verde-frente.png?v=1725024177', link:'https://chumbadas.com.br/products/carretel?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
@@ -387,10 +392,11 @@ const products = [
   {category:'Organização', name:'Porta Pernada e Chicote', price:'R$ 20,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/sedalha-areia.png?v=1725025534', link:'https://chumbadas.com.br/products/porta-pernadas-e-chicotes?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
   {category:'Práticos', name:'Protetor de Bobina P e G', price:'R$ 5,41', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/modelo_01.jpg?v=1731322768', link:'https://chumbadas.com.br/products/protetor-de-bobina-chumbada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
   {category:'Práticos', name:'Resgata Isca', price:'R$ 47,65', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/resgata-isca-foto-nova.png?v=1725025630', link:'https://chumbadas.com.br/products/resgata-isca?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
-  {category:'Práticos', name:'Ímã Fix', price:'R$ 34,50', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/ima-fix-02.jpg?v=1732619442', link:'https://chumbadas.com.br/products/ima-fix?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
-  {category:'Práticos', name:'Amarra Vara Velcro', price:'R$ 13,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/capa-apoio-de-vara-velcro.jpg?v=1730979392', link:'https://chumbadas.com.br/products/amarra-vara-velcro?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'}
+  {category:'Vestuário', name:'Blusa Corta Vento Esporte', price:'R$ 119,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/corta-vento-azul-claro.png?v=1778242773', link:'https://chumbadas.com.br/products/blusa-corta-vento-chumbada-1?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Blusa Corta Vento Presa Viva', price:'R$ 260,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/corta-vento_91f580da-c848-40b2-9aed-5d341a2f835f.png?v=1778242773', link:'https://chumbadas.com.br/products/blusa-corta-vento-presa-viva-chumbada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Anzóis', name:'Kit Anzol Offset EWG', price:'a partir de R$ 13,25', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/Anzois-maiores---1-l-0-ao-7-l-0_b01bbc5b-a69b-405f-aac9-6945b389ff9c.png?v=1701355520', link:'https://chumbadas.com.br/products/kit-anzol-ewg-10-unidades?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['1/0 a 7/0','R$ 16,25'],['1# a 6#','R$ 13,25']]}
 ];
-
+const sections = new Set();
 const grid = document.getElementById('grid');
 const count = document.getElementById('count');
 const search = document.getElementById('search');
