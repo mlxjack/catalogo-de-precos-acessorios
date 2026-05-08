@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catálogo de Acessórios | Chumbada Oficial</title>
+  <meta name="description" content="Catálogo digital de acessórios da Chumbada Oficial com busca, filtros, fotos, preços e links dos produtos." />
+  <style>
+    :root {
+      --orange: #ff5a00;
+      --orange-2: #ff7a1a;
+      --blue: #009fbd;
+      --blue-dark: #053f67;
+      --navy: #061726;
+      --ink: #102033;
+      --muted: #64748b;
+      --line: #e7eef6;
+      --bg: #f5f8fb;
+      --card: #ffffff;
+      --green: #d7ff00;
+      --shadow: 0 18px 55px rgba(6,23,38,.12);
+      --shadow-soft: 0 10px 28px rgba(6,23,38,.08);
+      --radius: 24px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(255,90,0,.16), transparent 28%),
+        radial-gradient(circle at 92% 4%, rgba(0,159,189,.18), transparent 32%),
+        linear-gradient(180deg,#fbfdff 0%,var(--bg) 45%,#eef5f9 100%);
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+    .page { overflow: hidden; }
+    
+    .hero {
+      position: relative;
+      min-height: 640px;
+      padding: 22px clamp(18px,4vw,64px) 70px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(6,23,38,.98), rgba(5,63,103,.9) 54%, rgba(0,159,189,.76)),
+        url('https://cdn.shopify.com/s/files/1/0454/5845/6736/files/CHUMBADA-OFICIAL.png?v=1756760093') center/380px no-repeat;
+      isolation: isolate;
+    }
+    .hero:before {
+      content: ""; position: absolute; inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255,90,0,.9), transparent 34%),
+        repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 1px, transparent 1px 14px);
+      mix-blend-mode: screen; opacity: .55; z-index: -1;
+    }
+    .hero:after {
+      content: ""; position: absolute; inset: auto -10% -35% -10%; height: 340px;
+      background: var(--bg); transform: rotate(-3deg); transform-origin: left top; z-index: -1;
+    }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 18px; max-width: 1260px; margin: 0 auto;
+    }
+    .brand { display: flex; align-items: center; gap: 14px; font-weight: 900; letter-spacing: .02em; text-transform: uppercase; }
+    .brand img { height: 58px; width: auto; filter: drop-shadow(0 10px 22px rgba(0,0,0,.24)); background: #fff; border-radius: 16px; padding: 6px; }
+    .brand span { font-size: 13px; line-height: 1.15; color: rgba(255,255,255,.88); }
+    .nav { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+    .nav a { padding: 11px 14px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; background: rgba(255,255,255,.08); backdrop-filter: blur(8px); font-weight: 750; font-size: 13px; color: #fff; }
+    .hero-grid { max-width: 1260px; margin: 78px auto 0; display: grid; grid-template-columns: minmax(0,1.05fr) minmax(320px,.7fr); gap: 46px; align-items: center; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; padding: 8px 13px; border-radius: 999px; background: rgba(215,255,0,.12); border: 1px solid rgba(215,255,0,.32); color: var(--green); font-weight: 900; text-transform: uppercase; letter-spacing: .12em; font-size: 12px; }
+    .eyebrow:before { content: ""; width: 8px; height: 8px; background: var(--green); border-radius: 99px; box-shadow: 0 0 18px var(--green); }
+    h1 { font-size: clamp(44px,7.1vw,94px); line-height: .9; margin: 22px 0 18px; letter-spacing: -.07em; text-transform: uppercase; max-width: 920px; }
+    .hero p { font-size: clamp(17px,2vw,22px); line-height: 1.5; color: rgba(255,255,255,.82); max-width: 720px; margin: 0 0 28px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 14px 18px; border-radius: 16px; font-weight: 900; border: 0; cursor: pointer; transition: .18s transform, .18s box-shadow, .18s background; font-size: 14px; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--green); color: #061726; box-shadow: 0 16px 32px rgba(215,255,0,.2); }
+    .btn-ghost { background: rgba(255,255,255,.11); border: 1px solid rgba(255,255,255,.2); color: #fff; }
+    .hero-card { position: relative; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.16); box-shadow: 0 25px 80px rgba(0,0,0,.24); border-radius: 32px; padding: 22px; backdrop-filter: blur(14px); }
+    .hero-card img { width: 100%; height: 260px; object-fit: contain; background: #fff; border-radius: 24px; padding: 20px; }
+    .hero-price { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-top: 18px; }
+    .hero-price small { display: block; text-transform: uppercase; color: rgba(255,255,255,.62); font-weight: 900; letter-spacing: .1em; margin-bottom: 6px; }
+    .hero-price strong { font-size: 34px; color: #fff; letter-spacing: -.04em; }
+    .badge { display: inline-flex; padding: 9px 12px; border-radius: 999px; background: var(--orange); font-weight: 950; text-transform: uppercase; font-size: 12px; box-shadow: 0 12px 26px rgba(255,90,0,.25); }
+    .wrap { max-width: 1260px; margin: 0 auto; padding: 0 clamp(18px,4vw,64px); }
+    .panel { position: sticky; top: 0; z-index: 20; margin-top: -58px; background: rgba(255,255,255,.88); border: 1px solid rgba(231,238,246,.9); border-radius: 24px; box-shadow: var(--shadow); backdrop-filter: blur(16px); padding: 14px; }
+    .tools { display: grid; grid-template-columns: minmax(220px,1fr) auto; gap: 12px; align-items: center; }
+    .search { position: relative; }
+    .search input { width: 100%; border: 1px solid var(--line); background: #fff; border-radius: 16px; padding: 16px 18px 16px 46px; font-size: 15px; font-weight: 650; outline: none; box-shadow: inset 0 0 0 1px transparent; }
+    .search input:focus { border-color: rgba(0,159,189,.45); box-shadow: 0 0 0 4px rgba(0,159,189,.1); }
+    .search svg { position: absolute; left: 17px; top: 50%; transform: translateY(-50%); width: 19px; height: 19px; color: var(--blue); }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .chip { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 12px 14px; font-weight: 900; font-size: 13px; color: #24455f; cursor: pointer; transition: .16s; }
+    .chip:hover, .chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .summary { display: flex; justify-content: space-between; gap: 16px; align-items: end; margin: 58px 0 22px; }
+    .summary h2 { margin: 0; font-size: clamp(30px,4vw,50px); letter-spacing: -.05em; color: var(--navy); }
+    .summary p { margin: 8px 0 0; color: var(--muted); line-height: 1.45; max-width: 650px; font-weight: 560; }
+    .count { font-weight: 950; color: var(--blue-dark); white-space: nowrap; }
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 18px; padding-bottom: 64px; }
+    .card { position: relative; display: flex; flex-direction: column; background: var(--card); border: 1px solid rgba(231,238,246,.92); border-radius: var(--radius); box-shadow: var(--shadow-soft); overflow: hidden; min-height: 390px; transition: .22s transform, .22s box-shadow, .22s border-color; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 22px 55px rgba(6,23,38,.16); border-color: rgba(0,159,189,.36); }
+    .card:before { content: ""; position: absolute; inset: 0 0 auto 0; height: 7px; background: linear-gradient(90deg,var(--orange),var(--blue),var(--green)); z-index: 1; }
+    .media { height: 190px; padding: 20px 20px 10px; background: linear-gradient(180deg,#fff,#f7fbff); display: grid; place-items: center; }
+    .media img { max-width: 100%; max-height: 160px; object-fit: contain; filter: drop-shadow(0 10px 16px rgba(6,23,38,.12)); }
+    .body { display: flex; flex-direction: column; gap: 12px; flex: 1; padding: 18px; }
+    .cat { display: inline-flex; align-self: flex-start; padding: 7px 10px; border-radius: 999px; background: #eef9fb; color: #007993; font-size: 11px; font-weight: 950; text-transform: uppercase; letter-spacing: .08em; }
+    .title { font-size: 19px; line-height: 1.08; margin: 0; color: var(--navy); letter-spacing: -.03em; text-transform: uppercase; }
+    .price { font-size: 26px; font-weight: 1000; color: var(--orange); letter-spacing: -.05em; margin-top: auto; }
+    .note { color: var(--muted); font-size: 13px; line-height: 1.35; font-weight: 600; }
+    
+    /* Variações e Span de Colunas */
+    .vars { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }
+    .vars li { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px dashed #dbe7f1; padding-bottom: 7px; margin-bottom: 7px; font-size: 13px; color: #314b63; font-weight: 700; break-inside: avoid; }
+    .vars b { color: var(--navy); white-space: nowrap; }
+    
+    .span-2 { grid-column: span 2; }
+    .span-3 { grid-column: span 3; }
+    .span-2 .vars { column-count: 2; column-gap: 24px; display: block; margin-top: auto;}
+    .span-3 .vars { column-count: 3; column-gap: 24px; display: block; margin-top: auto;}
+    
+    .card-actions { display: flex; gap: 9px; padding: 0 18px 18px; margin-top: auto; }
+    .mini-btn { display: flex; align-items: center; justify-content: center; flex: 1; border-radius: 14px; padding: 12px 10px; font-size: 13px; font-weight: 950; text-transform: uppercase; letter-spacing: .02em; border: 1px solid var(--line); background: #fff; color: var(--navy); cursor: pointer; }
+    .mini-btn.buy { background: var(--navy); color: #fff; border-color: var(--navy); }
+    .mini-btn.buy:hover { background: var(--blue-dark); }
+    .feature { grid-column: span 2; min-height: 390px; background: linear-gradient(135deg,#fff 0%,#f6fbff 52%,#effbff 100%); }
+    .feature .media { height: 230px; }
+    .feature .media img { max-height: 200px; }
+    .feature .title { font-size: 28px; }
+    .feature .body { padding: 22px; }
+    
+    .section-break { grid-column: 1/-1; margin: 20px 0 2px; padding: 24px; border-radius: 28px; background: linear-gradient(135deg,var(--navy),var(--blue-dark)); color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 18px; overflow: hidden; position: relative; }
+    .section-break:after { content: ""; position: absolute; right: -70px; top: -110px; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,90,0,.32); }
+    .section-break h3 { margin: 0; font-size: 26px; letter-spacing: -.04em; text-transform: uppercase; }
+    .section-break p { margin: 4px 0 0; color: rgba(255,255,255,.72); font-weight: 650; }
+    
+    .secretaria { margin: 10px 0 72px; border-radius: 36px; overflow: hidden; background: linear-gradient(135deg,var(--orange),#ff7b00); box-shadow: var(--shadow); color: #fff; display: grid; grid-template-columns: .75fr 1fr; align-items: stretch; }
+    .secretaria .side { background: rgba(0,0,0,.14); padding: 30px; display: flex; flex-direction: column; gap: 20px; }
+    .secretaria h2 { font-size: clamp(34px,4vw,58px); line-height: .92; margin: 0; letter-spacing: -.06em; text-transform: uppercase; }
+    .secretaria p { margin: 0; color: rgba(255,255,255,.86); line-height: 1.5; font-weight: 650; }
+    .secretaria img { width: 100%; height: 360px; object-fit: contain; background: #fff; border-radius: 24px; padding: 22px; }
+    .secretaria .content { padding: 30px; display: grid; gap: 16px; }
+    .secretaria .option { background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.24); border-radius: 22px; padding: 18px; display: flex; justify-content: space-between; gap: 18px; align-items: center; backdrop-filter: blur(10px); }
+    .secretaria .option h3 { margin: 0 0 5px; font-size: 19px; text-transform: uppercase; letter-spacing: -.02em; }
+    .secretaria .option span { color: rgba(255,255,255,.82); font-weight: 650; font-size: 13px; }
+    .secretaria .option b { font-size: 25px; white-space: nowrap; color: var(--green); }
+    
+    .footer { background: var(--navy); color: #fff; padding: 48px clamp(18px,4vw,64px); }
+    .footer-inner { max-width: 1260px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 26px; align-items: center; }
+    .footer img { height: 58px; background: #fff; border-radius: 16px; padding: 6px; }
+    .footer p { margin: 12px 0 0; color: rgba(255,255,255,.68); font-size: 13px; line-height: 1.5; max-width: 720px; }
+    .empty { grid-column: 1/-1; text-align: center; padding: 58px 20px; background: #fff; border-radius: 26px; border: 1px solid var(--line); box-shadow: var(--shadow-soft); }
+    .empty strong { display: block; font-size: 24px; color: var(--navy); margin-bottom: 6px; }
+    
+    @media (max-width: 1200px) {
+      .span-3 { grid-column: span 3; }
+      .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 1100px) { 
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-card { max-width: 520px; }
+      .feature { grid-column: span 3; }
+      .tools { grid-template-columns: 1fr; }
+      .filters { justify-content: flex-start; }
+    }
+    @media (max-width: 900px) {
+      .span-2 .vars, .span-3 .vars { column-count: 2; }
+    }
+    @media (max-width: 780px) { 
+      .hero { min-height: auto; padding-bottom: 96px; }
+      .topbar { align-items: flex-start; }
+      .nav { display: none; }
+      .hero-grid { margin-top: 48px; }
+      .brand img { height: 48px; }
+      h1 { font-size: 46px; }
+      .panel { margin-top: -72px; }
+      .grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .feature { grid-column: span 2; }
+      .span-2, .span-3 { grid-column: span 2; }
+      .card { min-height: 360px; }
+      .media { height: 160px; }
+      .media img { max-height: 135px; }
+      .title { font-size: 16px; }
+      .price { font-size: 22px; }
+      .summary { display: block; }
+      .secretaria { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 520px) { 
+      .grid { grid-template-columns: 1fr; }
+      .feature { grid-column: span 1; }
+      .span-2, .span-3 { grid-column: span 1; }
+      .span-2 .vars, .span-3 .vars { column-count: 1; }
+      .hero-actions .btn { width: 100%; }
+      .filters { overflow: auto; flex-wrap: nowrap; padding-bottom: 3px; }
+      .chip { white-space: nowrap; }
+      .section-break { display: block; }
+      .secretaria .option { display: block; }
+      .secretaria .option b { display: block; margin-top: 10px; }
+      .card-actions { flex-direction: column; }
+      .footer { padding-bottom: 70px; }
+    }
+    @media print {
+      .hero, .panel, .footer, .card-actions { display: none; }
+      .wrap { padding: 0; }
+      .grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .card { box-shadow: none; break-inside: avoid; }
+      .section-break { color: #111; background: #eee; }
+      .secretaria { box-shadow: none; color: #111; background: #eee; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header class="hero" id="topo">
+    <div class="topbar">
+      <a class="brand" href="#topo" aria-label="Chumbada Oficial">
+        <img src="https://cdn.shopify.com/s/files/1/0454/5845/6736/files/CHUMBADA-OFICIAL.png?v=1756760093" alt="Chumbada Oficial" />
+        <span>Catálogo digital<br>de acessórios</span>
+      </a>
+      <nav class="nav" aria-label="Navegação">
+        <a href="#catalogo">Produtos</a>
+        <a href="#secretaria">Secretária</a>
+        <a href="#rodape">Observações</a>
+      </nav>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Atualizado 01/2026</span>
+        <h1>Acessórios para quem pesca de verdade.</h1>
+        <p>Um catálogo super completo com preços, variações exatas (nada de consultar site) e todos os links atualizados dos produtos Chumbada Oficial.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
+          <a class="btn btn-ghost" href="https://chumbadas.com.br" target="_blank" rel="noopener">Ir para o site oficial</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Produto em destaque">
+        <img src="https://cdn.shopify.com/s/files/1/0454/5845/6736/files/secretaria-5_f65d3662-97d5-4e60-9411-9598c7576e5e.png?v=1749231375" alt="Secretária Chumbada Oficial" />
+        <div class="hero-price">
+          <div><small>Destaque</small><strong>Secretária</strong></div>
+          <span class="badge">Praticidade</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel" aria-label="Busca e filtros">
+      <div class="tools">
+        <label class="search">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input id="search" type="search" placeholder="Buscar por produto, variação ou categoria..." autocomplete="off" />
+        </label>
+        <div class="filters" id="filters"></div>
+      </div>
+    </section>
+
+    <section class="summary" id="catalogo">
+      <div>
+        <h2>Catálogo de acessórios</h2>
+        <p>Preços e variações atualizados. Para produtos com muitas variações, o card foi expandido para você ver todas as opções confortavelmente.</p>
+      </div>
+      <div class="count" id="count"></div>
+    </section>
+
+    <section class="grid" id="grid" aria-live="polite"></section>
+
+    <section class="secretaria" id="secretaria">
+      <div class="side">
+        <h2>Secretária</h2>
+        <p>Abaixo os preços base. Fica o espaço aguardando as novas composições e opções montadas para atualizarmos (Opções 1 a 4).</p>
+        <img src="https://cdn.shopify.com/s/files/1/0454/5845/6736/files/secretaria-5_f65d3662-97d5-4e60-9411-9598c7576e5e.png?v=1749231375" alt="Secretária Chumbada Oficial" />
+      </div>
+      <div class="content">
+        <div class="option"><div><h3>Secretária estampada</h3><span>Produto base</span></div><b>R$ 74,00</b></div>
+        <div class="option"><div><h3>Secretária sem estampa</h3><span>Produto base sem arte</span></div><b>R$ 59,00</b></div>
+        <div class="option"><div><h3>Secretária + adaptador</h3><span>Composição simples</span></div><b>R$ 93,00</b></div>
+        <div class="option"><div><h3>Adaptador de Secretária</h3><span>Vendido separadamente</span></div><b>R$ 19,00</b></div>
+        <div class="option"><div><h3>Opções montadas</h3><span>Aguardando configurações de Varas e Calão...</span></div><b>A atualizar</b></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="rodape">
+    <div class="footer-inner">
+      <div>
+        <img src="https://cdn.shopify.com/s/files/1/0454/5845/6736/files/CHUMBADA-OFICIAL.png?v=1756760093" alt="Chumbada Oficial" />
+        <p>Valores sujeitos a alterações sem aviso prévio. Imagens meramente ilustrativas. Catálogo criado para consulta comercial, com foco em lojistas e revendedores. (V23032026REV001)</p>
+      </div>
+      <a class="btn btn-primary" href="#topo">Voltar ao topo</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+const logo = 'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/CHUMBADA-OFICIAL.png?v=1756760093';
+
+// Base de Dados de Produtos super refinada baseada estritamente no PDF e nas suas regras
+const products = [
+  // --- VESTUÁRIO ---
+  {section:'Vestuário', category:'Vestuário', name:'Camiseta de Pesca Masculina', price:'R$ 95,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/camisa-nova.jpg?v=1725024039', link:'https://chumbadas.com.br/products/camiseta-de-pesca-masculina?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Avental Chumbada', price:'R$ 31,27', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/avental-03.png?v=1725023927', link:'https://chumbadas.com.br/products/avental-chumbada-bolso-duplo?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Boné Chumbada', price:'R$ 36,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/bones-09.png?v=1723736498', link:'https://chumbadas.com.br/products/bone-chumbada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Chapéu de Palha Chumbada', price:'R$ 37,38', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/chapeu_94827940-2a70-4825-baab-4666a1aaaeb8.png?v=1721917979', link:'https://chumbadas.com.br/products/chapel-de-palha-chumbada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Dedeira Hard', price:'R$ 15,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Dedeira-Hard-M.png?v=1725024839', link:'https://chumbadas.com.br/products/dedeira-de-protecao?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Dedeira Soft', price:'R$ 15,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Dedeira-soft-M.png?v=1725024839', link:'https://chumbadas.com.br/products/dedeira-de-protecao?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Dedeira Ultrasoft', price:'R$ 15,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Dedeira-ultra-soft-M.png?v=1725024839', link:'https://chumbadas.com.br/products/dedeira-de-protecao?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Tube Neck Tradicional', price:'R$ 41,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Tube-Neck-tradicional.png?v=1725026560', link:'https://chumbadas.com.br/products/tube-neck-tradicional?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Tube Neck Premium', price:'R$ 59,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Tube-Neck-Premium-azul.png?v=1721145615', link:'https://chumbadas.com.br/products/tube-neck-premium?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Calça Corta Vento Esporte', price:'R$ 99,90', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/calca-corta-vento-esporte-preta.png?v=1778242560', link:'https://chumbadas.com.br/products/calca-corta-vento-esporte?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Calça Elastic Comfort', price:'R$ 129,90', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Calca-elastica-comfort-verde.png?v=1778242650', link:'https://chumbadas.com.br/products/calca-elastic-comfort?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Blusa Corta Vento Comfort', price:'R$ 119,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Corta-vento-confort-preta-03.png?v=1778242774', link:'https://chumbadas.com.br/products/blusa-corta-vento-comfort?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Blusa Corta Vento Esporte', price:'R$ 155,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/corta-vento-azul-claro.png?v=1778242773', link:'https://chumbadas.com.br/products/blusa-corta-vento-chumbada-1?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Blusa Corta Vento Presa Viva', price:'R$ 260,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/corta-vento_91f580da-c848-40b2-9aed-5d341a2f835f.png?v=1778242773', link:'https://chumbadas.com.br/products/blusa-corta-vento-presa-viva-chumbada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Vestuário', name:'Toalha de Mão', price:'R$ 10,75', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/toalha-05_4069c005-8c7b-4992-a007-522148c621f3.png?v=1725026479', link:'https://chumbadas.com.br/products/toalha-chumbada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+
+  // --- TERMINAIS & CHUMBADAS ---
+  {section:'Linha Terminal e Anzóis', category:'Terminais', name:'Atrativo Comum', price:'R$ 3,50', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/atrativo-ermbalagem-vermelho.png?v=1725023879', link:'https://chumbadas.com.br/products/kit-atrativo-comum-5mm-5-filetes-com-10-unidades?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Terminais', name:'Atrativo Holográfico', price:'R$ 3,50', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/verde-cosmico.png?v=1725023860', link:'https://chumbadas.com.br/products/kit-atrativo-holografico-5mm-5-filetes-com-10-unidades?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Terminais', name:'Mini Atrativo Comum', price:'R$ 3,15', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/mini-atrativo-comum-amarelo.jpg?v=1727982527', link:'https://chumbadas.com.br/products/kit-mini-atrativo-comum?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Terminais', name:'Mini Atrativo Holográfico', price:'R$ 3,15', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/mini-atrativo-holo-vermelho-holografico_e5cd7c53-571c-41cb-8487-4f45ba00fb96.jpg?v=1727983615', link:'https://chumbadas.com.br/products/kit-mini-atrativo-holografico?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Terminais', name:'Cobrenó (Pacote 40)', price:'R$ 3,78', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/CobreNoAzulBicM_1.png?v=1778187291', link:'https://chumbadas.com.br/products/cobre-no-pacote-com-40?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Terminais', name:'Micro Snap + Cobre Nó M', price:'R$ 4,36', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/kit-micro-snap-cobre-no-M-preto_137cfd87-8ae8-41e4-acd4-34e5b119ed8d.png?v=1725025271', link:'https://chumbadas.com.br/products/kit-micro-snap-cobre-no-m-10-unidades-de-cada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Terminais', name:'Snap Universal + Cobrenó G', price:'R$ 4,39', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/snap-mais-cobre-no-verde.png?v=1725025851', link:'https://chumbadas.com.br/products/kit-snap-cobre-no-g-20-unidades-de-cada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Terminais', name:'Rotor Cabeça de Cobra', price:'R$ 8,10', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/Rotor-Cabeca-de-Cobra_8c7cb230-87a7-4298-9401-c5de59872242.png?v=1725025653', link:'https://chumbadas.com.br/products/rotor-de-engate-rapido-cabeca-de-cobra?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['Pacote com 8 (P ou G)','R$ 8,10']]},
+  {category:'Terminais', name:'Rotor de Engate Rápido V', price:'a partir de R$ 10,50', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/rotor-8-unidades-G_8240a593-c0bc-4189-a7b5-033282bd5c76.png?v=1725025693', link:'https://chumbadas.com.br/products/rotor-de-engate-rapido-v?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', span: 2, vars:[['Pacote com 8 (P, M, G)','R$ 10,50'],['Pacote com 8 Micro','R$ 17,74'],['Pacote com 30 (P, M, G)','R$ 35,25'],['Pacote com 30 Micro','R$ 61,20']]},
+  {category:'Terminais', name:'Stopper Oliva P, M, G', price:'R$ 5,08', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Stopper-oliva-grande.png?v=1778190515', link:'https://chumbadas.com.br/products/stopper-modelo-oliva?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Terminais', name:'Stopper Cilíndrico P, M, G', price:'R$ 5,08', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/Stopper-cilindrico-G_d22c0f54-7417-4703-ad9b-cf8e4e892443.png?v=1725025928', link:'https://chumbadas.com.br/products/stopper-modelo-cilindrico?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Terminais', name:'Miçanga de Latão', price:'R$ 8,50', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/micanga_de_latao.png?v=1778238978', link:'https://chumbadas.com.br/products/micangas-de-latao-pacote-com-30?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Terminais', name:'Miçanga de Vidro', price:'R$ 4,95', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/micanga-de-vidro-vermelha.png?v=1725025338', link:'https://chumbadas.com.br/products/micangas-de-vidro-pacote-com-500?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Terminais', name:'Nó de Correr Kit c/ 4', price:'R$ 3,70', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/no-de-correr-m-embalagem.png?v=1725025413', link:'https://chumbadas.com.br/products/kit-no-de-correr?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Terminais', name:'Pipa Kit com 2', price:'R$ 3,99', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/Pipa-2unidades_6594cf33-b024-4508-a790-f39667ed2a69.jpg?v=1725025445', link:'https://chumbadas.com.br/products/pipa?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  
+  {category:'Anzóis', name:'Kit Anzol Offset EWG (10 un)', price:'a partir de R$ 13,25', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/Anzois-maiores---1-l-0-ao-7-l-0_b01bbc5b-a69b-405f-aac9-6945b389ff9c.png?v=1701355520', link:'https://chumbadas.com.br/products/kit-anzol-ewg-10-unidades?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['1# a 6#','R$ 13,25'],['1/0 a 7/0','R$ 16,25']]},
+  
+  {category:'Montagem', name:'Destorcedores', price:'a partir de R$ 3,94', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/Destorcedor_54f6d99b-982a-4d68-b6ef-981613cc955b.jpg?v=1725025037', link:'https://chumbadas.com.br/products/destorcedor?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', span: 2, vars:[['4kg / 7mm / 14 un','R$ 4,91'],['19kg / 11mm / 12 un','R$ 3,94'],['35kg / 15mm / 10 un','R$ 4,75'],['75kg / 25mm / 5 un','R$ 6,33']]},
+  {category:'Montagem', name:'Destorcedor Triplo', price:'a partir de R$ 5,48', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/destorcedor-triplo-28mm_79eab599-5db1-4d34-9966-3cb67d55f179.png?v=1725025061', link:'https://chumbadas.com.br/products/kit-destorcedor-triplo?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', span: 2, vars:[['14kg / 15mm / 10 un','R$ 5,48'],['20kg / 19mm / 10 un','R$ 6,87'],['30kg / 23mm / 8 un','R$ 7,30'],['48kg / 28mm / 6 un','R$ 9,87'],['55kg / 33mm / 6 un','R$ 12,45']]},
+  
+  {category:'Montagem', name:'Snap Single', price:'R$ 2,88', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Snap-Single-19mm-35kg_a69e9534-c0b1-46b7-bc72-b1fb2af9b7f7.png?v=1725276575', link:'https://chumbadas.com.br/collections/terminais', vars:[['8mm 4kg','R$ 2,88'],['13mm 11kg','R$ 2,88'],['19mm 35kg','R$ 2,88']]},
+  {category:'Montagem', name:'Snap Double', price:'a partir de R$ 3,35', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Snap-Double-24mm-1-un_fbe828d6-89b4-4a42-ad78-6f5f022f47e9.png?v=1725276569', link:'https://chumbadas.com.br/collections/terminais', vars:[['12mm 8kg','R$ 3,35'],['17mm 22kg','R$ 4,00'],['24mm 45kg','R$ 4,07']]},
+  {category:'Montagem', name:'Snap Gota', price:'R$ 2,15', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Snap-Gota-14mm-40kg.png?v=1731420237', link:'https://chumbadas.com.br/collections/terminais', vars:[['9mm 15kg','R$ 2,15'],['14mm 40kg','R$ 2,15']]},
+  {category:'Montagem', name:'Snap Francês', price:'a partir de R$ 3,38', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/frances.png?v=1778246575', link:'https://chumbadas.com.br/collections/terminais', span: 2, vars:[['10mm 5kg','R$ 3,38'],['14mm 9kg','R$ 4,69'],['15mm 10kg','R$ 4,75'],['17mm 13kg','R$ 4,88'],['20mm 18kg','R$ 5,68'],['22mm 19kg','R$ 5,26'],['25mm 20kg','R$ 5,46'],['30mm 25kg','R$ 6,93'],['35mm 35kg','R$ 8,31']]},
+  
+  {category:'Montagem', name:'Chicotes Montados', price:'a partir de R$ 8,31', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/modelo-17_42f1ff77-58eb-4f62-8111-c3521ea8566e.png?v=1737636375', link:'https://chumbadas.com.br/collections/chicotes-montados', span: 3, vars:[['Pesca de Beira 2','R$ 8,31'],['Pesca de Beira 4','R$ 10,11'],['Praia Distância 1','R$ 19,10'],['Praia Distância 2','R$ 23,60'],['Praia Distância 3','R$ 25,40'],['Mar Moderado 1','R$ 20,89'],['Mar Moderado 2','R$ 24,49'],['Mar Moderado 3','R$ 28,09'],['Mar Agitado 1','R$ 20,89'],['Mar Agitado 2','R$ 24,49'],['Mar Agitado 3','R$ 28,09'],['Fundo 1,30m','R$ 22,00'],['Fundo 1,80m','R$ 22,00'],['Beira 1,00m','R$ 22,00'],['Meia Água','R$ 22,00']]},
+  
+  {category:'Chumbadas', name:'Kits de Chumbada', price:'a partir de R$ 4,67', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/kit-costao-2.png?v=1701357287', link:'https://chumbadas.com.br/collections/kits-de-chumbadas', span: 2, vars:[['DownShots','R$ 5,57'],['Mini Chumbadas 10g','R$ 4,67'],['Mini Chumbadas 15g','R$ 7,02'],['Mini Chumbadas 20g','R$ 9,35'],['Mini Chumbadas 25g','R$ 11,69'],['Mini Chumbadas 30g','R$ 14,02'],['Mini Chumbadas 35g','R$ 16,37'],['Mini Chumbadas 40g','R$ 18,70'],['Mini Chumbadas 45g','R$ 21,04'],['Mini Chumbadas 50g','R$ 23,37']]},
+  
+  {category:'Chumbadas', name:'Chumbadas (Por KG)', price:'a partir de R$ 36,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/kit-costao-2.png?v=1701357287', link:'https://chumbadas.com.br/collections/chumbadas', span: 2, vars:[['KG Chumbada Natural','R$ 36,00'],['KG Chumbada Colorida','R$ 48,36'],['KG Poita Natural','R$ 58,28'],['KG Pesos 1g a 5g','R$ 44,65']]},
+  
+  {category:'Chumbadas', name:'Hastes para Chumbada', price:'a partir de R$ 0,41', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/kit-costao-2.png?v=1701357287', link:'#', vars:[['Haste Simples','R$ 0,41'],['Haste com Destorcedor','R$ 1,77']]},
+
+  // --- SUPORTES E ORGANIZAÇÃO ---
+  {section:'Suportes e Organização', category:'Suportes', name:'Suporte de Vara Premium', price:'a partir de R$ 9,60', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/completo.png?v=1768318068', link:'https://chumbadas.com.br/products/suporte-de-vara-calao?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', span: 2, vars:[['Completo','R$ 130,00'],['Apenas Barra 1m','R$ 34,21'],['Apenas Barra 1,20m','R$ 41,05'],['Apenas Barra 1,35m','R$ 46,18'],['Apenas Barra 1,50m','R$ 51,32'],['Somente Copo','R$ 10,80'],['Somente Ferradura','R$ 9,60']]},
+  {category:'Suportes', name:'Suporte de Vara Slim', price:'a partir de R$ 4,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/preto-40.jpg?v=1768317605', link:'https://chumbadas.com.br/products/suporte-de-vara-slim?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', span: 2, vars:[['1m Completo','R$ 54,61'],['1,20m Completo','R$ 61,45'],['1,35m Completo','R$ 66,58'],['1,50m Completo','R$ 71,72'],['Copo de Borracha','R$ 5,00'],['Apoio de Borracha','R$ 4,00']]},
+  {category:'Suportes', name:'Suportes de Plástico e Borracha', price:'a partir de R$ 14,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Copo_borracha.jpg?v=1751894115', link:'#', span: 2, vars:[['Plástico 40cm','R$ 14,00'],['Plástico 60cm','R$ 17,00'],['Plástico 85cm','R$ 23,00'],['Plástico 1m','R$ 25,00'],['Plástico 1,2m','R$ 29,00'],['Borracha 40cm','R$ 16,00'],['Borracha 60cm','R$ 19,00'],['Borracha 85cm','R$ 25,00'],['Borracha 1m','R$ 27,00'],['Borracha 1,2m','R$ 31,00']]},
+  {category:'Suportes', name:'Suporte Horizontal', price:'a partir de R$ 7,95', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Suporte-horizontal-completo-close.jpg?v=1742998092', link:'https://chumbadas.com.br/products/suporte-horiziontal?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', span: 2, vars:[['Completo 40cm','R$ 15,95'],['Completo 60cm','R$ 19,95'],['Completo 85cm','R$ 24,95'],['Completo 1m','R$ 27,95'],['Completo 1,2m','R$ 31,95'],['Somente Peça Plástica','R$ 7,95'],['Somente Barra 40cm','R$ 8,00'],['Somente Barra 60cm','R$ 12,00'],['Somente Barra 85cm','R$ 17,00'],['Somente Barra 1m','R$ 20,00'],['Somente Barra 1,2m','R$ 24,00']]},
+  {category:'Organização', name:'Varal Chumbada', price:'a partir de R$ 83,76', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/varal-fundo-branco.jpg?v=1778240580', link:'https://chumbadas.com.br/products/varal-chumbada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['Completo','R$ 130,00'],['Parte Superior','R$ 83,76'],['Superior com Tubo','R$ 99,17']]},
+  {category:'Organização', name:'Porta Pernada Compacto', price:'a partir de R$ 15,90', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/porta-pernada-cano-compacto-01.jpg?v=1738780702', link:'https://chumbadas.com.br/products/porta-pernada-compacto?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['30cm','R$ 15,90'],['50cm','R$ 21,90']]},
+  {category:'Organização', name:'Porta Pernada Cano Completo', price:'a partir de R$ 9,92', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/30-cm-banco_24e57b07-67cb-4b0f-9828-253d4e3ec9fd.png?v=1725024095', link:'https://chumbadas.com.br/products/porta-pernada-cano?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', span: 2, vars:[['20cm','R$ 9,92'],['30cm','R$ 11,14'],['30+30cm','R$ 20,29'],['40cm','R$ 12,46'],['50cm','R$ 13,79'],['60cm','R$ 15,31'],['70cm','R$ 16,73'],['80cm','R$ 18,26'],['100cm','R$ 21,21']]},
+  {category:'Organização', name:'Porta Pernada Somente Cano', price:'a partir de R$ 4,95', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/somente-cano-40cm_e6bca2ec-d0b2-4b79-b6cf-30cf21387706.png?v=1725024095', link:'https://chumbadas.com.br/products/porta-pernada-cano?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', span: 2, vars:[['20cm','R$ 4,95'],['30cm','R$ 6,17'],['40cm','R$ 7,49'],['50cm','R$ 8,82'],['60cm','R$ 10,34'],['70cm','R$ 11,76'],['80cm','R$ 13,29'],['100cm','R$ 16,24']]},
+  {category:'Peças', name:'Trava Linha', price:'R$ 2,98', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/suporte-1_2ff057e5-1a15-402d-8e56-134fd16ce14c.png?v=1725024117', link:'https://chumbadas.com.br/products/trava-linha-cano-borracha?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Peças', name:'Apoio para Anzol', price:'R$ 1,99', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/suporte-3_49d86944-6027-4fee-a41f-89707bb55c86.png?v=1725024074', link:'https://chumbadas.com.br/products/apoio-anzol-cano?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Suportes', name:'Apoio para Barco', price:'R$ 16,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/apoio-para-barco.png?v=1778240915', link:'https://chumbadas.com.br/products/apoio-barco-de-borracha?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['Simples','R$ 16,00'],['Com Elástico','R$ 16,00']]},
+  {category:'Organização', name:'Suporte para Molinetes (4un)', price:'R$ 15,90', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/suporte-para-molinetes-montado.png?v=1725026443', link:'https://chumbadas.com.br/products/porta-pernada-compacto?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', featured:true},
+  {category:'Suportes', name:'Kit Suporte Carretilha e Molinete', price:'R$ 16,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Suporte-para-carretilha-e-molinete-individual-amarelo.png?v=1741173082', link:'https://chumbadas.com.br/products/kit-suporte-para-carretilha-e-molinete-indivudual?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Suportes', name:'Adaptador de Vara p/ Molinete', price:'R$ 21,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/adaptador_de_vara.jpg?v=1773061276', link:'https://chumbadas.com.br/products/adaptador-de-vara-para-suporte-de-molinete?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  
+  // --- ACESSÓRIOS PRÁTICOS ---
+  {section:'Acessórios Práticos', category:'Práticos', name:'Copo Organizador', price:'a partir de R$ 1,94', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/c4dd0fe0-b913-4b7f-981a-2bf5407f2337.png?v=1773931964', link:'https://chumbadas.com.br/products/copo-organizador?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['P','R$ 1,94'],['M','R$ 2,46'],['G','R$ 3,60'],['Kit Completo','R$ 7,36']]},
+  {category:'Práticos', name:'Elastricot Fino 100m', price:'R$ 1,65', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/elastricotextrafino.jpg?v=1725025094', link:'https://chumbadas.com.br/products/elastricot?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Práticos', name:'Elastricot Extra Fino 150m', price:'R$ 1,80', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/elastricotextrafino.jpg?v=1725025094', link:'https://chumbadas.com.br/products/elastricot?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Práticos', name:'Iscador Preto ou Cristal', price:'R$ 7,85', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/iscador.png?v=1725025122', link:'https://chumbadas.com.br/products/iscador?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Práticos', name:'Iscador Agulhão', price:'R$ 8,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/Agulhao.png?v=1701356600', link:'https://chumbadas.com.br/products/iscador-agulhao?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Práticos', name:'Iscador Duplo', price:'R$ 8,40', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/iscador-duplo.png?v=1725025139', link:'https://chumbadas.com.br/products/iscador-duplo?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Medição', name:'Régua Cantoneira', price:'a partir de R$ 11,99', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/Regua-100cm.png?v=1725025585', link:'https://chumbadas.com.br/products/regua-cantoneira?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['50cm','R$ 11,99'],['100cm','R$ 17,68']]},
+  {category:'Práticos', name:'Saca Anzol de Competição', price:'R$ 20,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/saca-anzol-nano-1.png?v=1725025795', link:'https://chumbadas.com.br/products/saca-anzol-de-competicao?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['Nano','R$ 20,00'],['Tamanho P','R$ 20,00'],['Tamanho M','R$ 20,00'],['Tamanho G','R$ 20,00']]},
+  {category:'Práticos', name:'Saca Anzol / Desembuchador', price:'a partir de R$ 6,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/SacaAnzol-Kit.jpg?v=1764885170', link:'https://chumbadas.com.br/products/saca-anzol-desembuchador?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['Unidade','R$ 6,00'],['Kit P, M, G','R$ 14,40']]},
+  {category:'Práticos', name:'Agulha de Tarrafa', price:'a partir de R$ 1,20', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/15-20ccm.png?v=1725023380', link:'https://chumbadas.com.br/products/agulha-de-tarrafa?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['15cm','R$ 1,20'],['20cm','R$ 1,85']]},
+  {category:'Práticos', name:'Kit Enrolador', price:'a partir de R$ 135,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/kit_enrolador.jpg?v=1725025232', link:'https://chumbadas.com.br/products/kit-enrolador?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web', vars:[['Colorido','R$ 135,00'],['Natural','R$ 150,00']]},
+  {category:'Práticos', name:'Alicate de Contenção Plástico', price:'a partir de R$ 4,97', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/alicate.jpg?v=1773842723', link:'https://chumbadas.com.br/collections/acessorios', vars:[['Outras Cores','R$ 4,97'],['Cor Glow','R$ 5,50']]},
+  {category:'Práticos', name:'Adaptador de Carretilha Kit c/ 4', price:'R$ 11,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/suporte-para-carretilhas-02_045bc35a-4013-430e-9ec8-ea46e12db27b.png?v=1725026418', link:'https://chumbadas.com.br/products/kit-adaptador-de-carretilha?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Práticos', name:'Bastão Luminoso', price:'R$ 3,50', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/bastao-luminoso-embalagem.png?v=1718111813', link:'https://chumbadas.com.br/products/bastao-luminoso-star-light?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Práticos', name:'Carretel Redondo', price:'R$ 1,20', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Carretel-verde-frente.png?v=1725024177', link:'https://chumbadas.com.br/products/carretel?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Práticos', name:'Carretel Retangular', price:'R$ 1,20', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/carretel_retangular_1.jpg?v=1773237833', link:'https://chumbadas.com.br/products/carretel-retangular?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Organização', name:'Nano Pipe', price:'R$ 6,95', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/Nano-Pipe-laranja.png?v=1725025387', link:'https://chumbadas.com.br/products/nano-pipe-borracha-cano-1?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Organização', name:'Porta Elastricot', price:'R$ 3,20', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/porta-elastricot-verde.png?v=1772216706', link:'https://chumbadas.com.br/products/porta-elastricot?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Organização', name:'Porta Isca e Chumbada', price:'R$ 17,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/portaisca.jpg?v=1725025510', link:'https://chumbadas.com.br/products/porta-isca-e-chumbada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Organização', name:'Porta Pernada e Chicote', price:'R$ 20,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/sedalha-areia.png?v=1725025534', link:'https://chumbadas.com.br/products/porta-pernadas-e-chicotes?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Práticos', name:'Protetor de Bobina P e G', price:'R$ 5,41', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/modelo_01.jpg?v=1731322768', link:'https://chumbadas.com.br/products/protetor-de-bobina-chumbada?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Práticos', name:'Resgata Isca', price:'R$ 47,65', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/products/resgata-isca-foto-nova.png?v=1725025630', link:'https://chumbadas.com.br/products/resgata-isca?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Práticos', name:'Ímã Fix', price:'R$ 34,50', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/ima-fix-02.jpg?v=1732619442', link:'https://chumbadas.com.br/products/ima-fix?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'},
+  {category:'Práticos', name:'Amarra Vara Velcro', price:'R$ 13,00', img:'https://cdn.shopify.com/s/files/1/0454/5845/6736/files/capa-apoio-de-vara-velcro.jpg?v=1730979392', link:'https://chumbadas.com.br/products/amarra-vara-velcro?utm_source=copyToPasteBoard&utm_medium=product-links&utm_content=web'}
+];
+
+const grid = document.getElementById('grid');
+const count = document.getElementById('count');
+const search = document.getElementById('search');
+const filters = document.getElementById('filters');
+let current = 'Todos';
+
+// Monta lista de categorias únicas
+const categories = ['Todos', ...Array.from(new Set(products.map(p=>p.category))).sort((a,b)=>a.localeCompare(b,'pt-BR'))];
+
+filters.innerHTML = categories.map(c=>`<button class="chip ${c==='Todos'?'active':''}" type="button" data-filter="${c}">${c}</button>`).join('');
+
+filters.addEventListener('click', e => {
+  const btn = e.target.closest('.chip');
+  if(!btn) return;
+  current = btn.dataset.filter;
+  document.querySelectorAll('.chip').forEach(b => b.classList.toggle('active', b===btn));
+  render();
+});
+
+search.addEventListener('input', render);
+
+function textOf(p) {
+  return [p.name, p.category, p.price, (p.vars||[]).flat().join(' ')].join(' ').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+}
+
+function escapeHTML(s) {
+  return String(s).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+}
+
+function productCard(p) {
+  const vars = p.vars 
+    ? `<ul class="vars">${p.vars.map(v=>`<li><span>${escapeHTML(v[0])}</span><b>${escapeHTML(v[1])}</b></li>`).join('')}</ul>` 
+    : `<div class="note">Produto sem variações de tamanho listadas.</div>`;
+  
+  const link = p.link && p.link !== '#' ? p.link : null;
+  
+  // Span condicional baseado na quantidade de variações para exibir confortavelmente
+  let spanClass = '';
+  if (p.span) {
+      spanClass = `span-${p.span}`;
+  } else if (p.vars && p.vars.length >= 10) {
+      spanClass = 'span-3';
+  } else if (p.vars && p.vars.length >= 5) {
+      spanClass = 'span-2';
+  }
+  
+  if (p.featured) spanClass += ' feature';
+
+  return `<article class="card ${spanClass}">
+    <div class="media"><img loading="lazy" src="${p.img || logo}" alt="${escapeHTML(p.name)}" onerror="this.src='${logo}'"></div>
+    <div class="body">
+        <span class="cat">${escapeHTML(p.category)}</span>
+        <h3 class="title">${escapeHTML(p.name)}</h3>
+        <div class="price">${escapeHTML(p.price)}</div>
+        ${vars}
+    </div>
+    <div class="card-actions">
+        <button class="mini-btn" type="button" onclick="navigator.clipboard && navigator.clipboard.writeText('${escapeHTML(p.name)}')">Copiar nome</button>
+        ${link ? `<a class="mini-btn buy" href="${link}" target="_blank" rel="noopener">Ver no site</a>` : `<span class="mini-btn buy" style="opacity: 0.5">Sem link</span>`}
+    </div>
+  </article>`;
+}
+
+function render() {
+  const q = search.value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const filtered = products.filter(p => (current === 'Todos' || p.category === current) && (!q || textOf(p).includes(q)));
+  
+  count.textContent = `${filtered.length} produto${filtered.length === 1 ? '' : 's'}`;
+  
+  if(!filtered.length) {
+      grid.innerHTML = `<div class="empty"><strong>Nenhum produto encontrado.</strong><span>Tente buscar por outro termo ou mudar o filtro.</span></div>`;
+      return;
+  }
+  
+  let lastSection = '';
+  grid.innerHTML = filtered.map((p) => {
+    let html = '';
+    if ((current === 'Todos' || !q) && p.section && p.section !== lastSection) {
+      lastSection = p.section;
+      html += `<div class="section-break"><div><h3>${escapeHTML(p.section)}</h3><p>Seleção organizada para consulta rápida.</p></div><span class="badge">Chumbada Oficial</span></div>`;
+    }
+    html += productCard(p);
+    return html;
+  }).join('');
+}
+
+// Inicia a renderização
+render();
+</script>
+</body>
+</html>
